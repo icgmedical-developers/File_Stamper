@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Stamper</title>
+    <link rel="stylesheet" href = "{% static 'styles.css' %}">
+
+</head>
+
+<body>
+    <div class = "header">
+        <img src = "{%static 'logo.png' %}" alt = "logo" class = "logo">
+    </div>
+    <div class="container">
+
+        <h1>File <span style="color: #a10606;">Stamper</span></h1>
+        <label class="drop-container" id="dropcontainer">
+            <input type="file" id="file-input" accept="application/pdf,image/*" />
+        </label>
+
+        <div class="controls">
+            <input type="hidden" id="stamp-image-path" value="{% static 'original_stamp.png'%}">
+            <input type="date" id="stamp-date" >
+            <input type = "hidden"  id = "user_name" value = "{{username}}">
+            <label for = "range">Stamp Size
+            </label>
+                <input type="range" id="stamp-size" value="150" min="1" max="300">
+        </div>
+
+        <button id="download-pdf">Download Stamped File</button>
+        <button id="remove-page-stamps">Remove Current Page Stamps</button>
+        <button id="remove-stamps">Remove All Stamps</button>
+        <div>
+            <button id="prev-page">Previous</button>
+            <button id="next-page">Next</button>
+            <span id="page-info"></span>
+        </div>
+
+        <div style="position: relative;">
+            <canvas id="file-viewer"></canvas>
+            <div id="stamp-image-preview"></div>
+        </div>
+
+        <footer class = "footer">
+            Developed By Automation and AI Team
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1"></script>
+    <script src="{% static 'script.js'%}"></script>
+</body>
+
+</html>
