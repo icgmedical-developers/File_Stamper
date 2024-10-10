@@ -24,34 +24,23 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          cd ICGAI
           python -m venv venv
           source venv/bin/activate
       
       - name: Install dependencies
-        run: |
-          cd ICGAI
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Collect static files
-        run: |
-          cd ICGAI
-          python manage.py collectstatic --noinput
-
+        run: pip install -r requirements.txt
+        
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: |
-          cd ICGAI
-          zip release.zip ./* -r
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
-            ICGAI/release.zip
+            release.zip
             !venv/
 
   deploy:
@@ -77,4 +66,4 @@ jobs:
         with:
           app-name: 'stampify'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC192735729C43C980A27A801B9B2EDB }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BE4037B692B49D59F8F333619E33FEF }}
