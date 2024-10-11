@@ -50,6 +50,6 @@ class CustomMicrosoftAuthMiddleware:
             # Create a new user without setting a password
             new_user = User.objects.create_user(username=username, email=user_email)
             request.user = new_user
-
+        print(f"request.user: {request.user}")
         response = self.get_response(request)
         return response
